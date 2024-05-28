@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" />
+
+    <title>Persona Team</title>
+    <!--
+    Reflux Template
+    https://templatemo.com/tm-531-reflux
+    -->
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-style.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/lightbox.css' %}" />
+    <style>
+      .snip1321 img {
+        width: 500px;
+        height: 700px;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="page-wraper">
+      <!-- Sidebar Menu -->
+      <div class="responsive-nav">
+        <i class="fa fa-bars" id="menu-toggle"></i>
+        <div id="menu" class="menu">
+          <i class="fa fa-times" id="menu-close"></i>
+          <div class="container">
+            <div class="image">
+              <a href="#"><img src="{% static 'assets/images/pp.jpeg' %}" alt="" /></a>
+            </div>
+            <div class="author-content">
+              <h4>Persona Team</h4>
+              <span>Kelompok 4</span>
+            </div>
+            <nav class="main-nav" role="navigation">
+              <ul class="main-menu">
+                <li><a href="#section1">Our Team</a></li>
+              </ul>
+            </nav>
+            <div class="social-network">
+              <ul class="soial-icons">
+                <li>
+                  <a href="https://fb.com/templatemo"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="fa fa-linkedin"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="fa fa-dribbble"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="fa fa-rss"></i></a>
+                </li>
+              </ul>
+            </div>
+            <div class="copyright-text">
+              <p>Kelas Praktisi Adsis D</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section -->
+      <section class="section my-work" data-section="section3">
+        <div class="container">
+            <ul>
+            {% for member in members %}
+          <div class="section-heading">
+            
+            
+                
+            <h2>{{ member.nama }}</h2>
+            <div class="line-dec"></div>
+            <span>Kelompok 4 Adsis</span>
+          </div>
+        
+            
+              <div class="isotope-box">
+                <div class="isotope-item" data-type="ui/ux">
+                    
+                        
+                        <li>
+                            <h2></h2>
+                            <p>NIM: {{ member.NIM }}</p>
+                            <p>Kelas: {{ member.kelas }}</p>
+                            <p>Role: {{ member.role }}</p>
+                            {% if member.image %}
+                            <figure class="snip1321">
+                                <img src="{{ member.image.url }}" alt="{{ member.nama }}" >
+                            </figure>
+                            
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    
+                  <figure class="snip1321">
+                    <img src="{% static 'assets/images/azar.jpeg' %}" alt="sq-sample26" />
+                    <figcaption>
+                      <a href="{% static 'assets/images/azar.jpeg' %}" data-lightbox="image-1" data-title="Caption"><i class="fa fa-info"></i></a>
+                      <h4>Azhar Bazuri</h4>
+                      <span>UI/UX Designer</span>
+                    </figcaption>
+                  </figure>
+                </div>
+                
+              </div>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Scripts -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'assets/js/isotope.min.js' %}"></script>
+    <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'assets/js/lightbox.js' %}"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+    <script>
+      //according to loftblog tut
+      $(".main-menu li:first").addClass("active");
+
+      var showSection = function showSection(section, isAnimate) {
+        var direction = section.replace(/#/, ""),
+          reqSection = $(".section").filter('[data-section="' + direction + '"]'),
+          reqSectionPos = reqSection.offset().top - 0;
+
+        if (isAnimate) {
+          $("body, html").animate(
+            {
+              scrollTop: reqSectionPos
+            },
+            800
+          );
+        } else {
+          $("body, html").scrollTop(reqSectionPos);
+        }
+      };
+
+      var checkSection = function checkSection() {
+        $(".section").each(function() {
+          var $this = $(this),
+            topEdge = $this.offset().top - 80,
+            bottomEdge = topEdge + $this.height(),
+            wScroll = $(window).scrollTop();
+          if (topEdge < wScroll && bottomEdge > wScroll) {
+            var currentId = $this.data("section"),
+              reqLink = $("a").filter("[href*=\\#" + currentId + "]");
+            reqLink
+              .closest("li")
+              .addClass("active")
+              .siblings()
+              .removeClass("active");
+          }
+        });
+      };
+
+      $(".main-menu").on("click", "a", function(e) {
+        e.preventDefault();
+        showSection($(this).attr("href"), true);
+      });
+
+      $(window).scroll(function() {
+        checkSection();
+      });
+    </script>
+    
+  </body>
+</html>
